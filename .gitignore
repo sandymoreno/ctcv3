@@ -1,0 +1,10 @@
+app/logs/
+app/cache/
+web/bundles/
+web/uploads
+app/config/parameters.yml
+*~
+vendor/
+composer.phar
+composer.lock
+/.idea/
