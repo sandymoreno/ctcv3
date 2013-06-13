@@ -31,9 +31,34 @@
         "friendsofsymfony/elastica-bundle": "dev-master",
 		"willdurand/faker-bundle": "dev-master",
 		"mopa/bootstrap-bundle": "dev-master",
-		"knplabs/rad-bundle": "dev-develop"
+		"knplabs/rad-bundle": "dev-develop",
+        "jlong/sass-twitter-bootstrap": "dev-master",
+        "jms/translation-bundle": "dev-master",
+        "liip/imagine-bundle": "dev-master",
+		"genemu/form-bundle": "2.2.*",
+		"lexik/mailer-bundle": "dev-master"
+		
+		
 		
     },
+    "repositories": [
+        {
+            "type":"package",
+            "package": {
+                "version":"dev-master",
+                "name":"jlong/sass-twitter-bootstrap",
+                "source": {
+                    "url":"https://github.com/jlong/sass-twitter-bootstrap.git",
+                    "type":"git",
+                    "reference":"master"
+                },
+                "dist": {
+                    "url":"https://github.com/jlong/sass-twitter-bootstrap/archive/master",
+                    "type":"zip"
+                }
+            }
+        }
+    ],
     "scripts": {
         "post-install-cmd": [
             "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",

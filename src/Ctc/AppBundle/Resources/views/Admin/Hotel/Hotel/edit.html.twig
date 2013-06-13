@@ -1,0 +1,17 @@
+{% extends '::layout_admin.html.twig' %}
+
+{% block content -%}
+
+ {% include 'CtcAppBundle:Admin/Common/Crud:_form.html.twig' with {'form':edit_form,'route_action':path('admin_hotel_update',{'id':entity.id})} %}
+
+
+    <ul class="record_actions">
+        <li>
+            <a href="{{ path('admin_hotel') }}">
+                Back to the list
+            </a>
+        </li>
+    </ul>
+
+{% endblock %}
+

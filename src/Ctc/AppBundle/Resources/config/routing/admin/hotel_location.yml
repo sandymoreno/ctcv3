@@ -1,0 +1,33 @@
+admin_location:
+    pattern:  /
+    defaults: { _controller: "CtcAppBundle:Admin\Hotel\\Location:index" }
+
+admin_location_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "CtcAppBundle:Admin\Hotel\\Location:show" }
+    
+    
+admin_location_new:
+    pattern:  /new
+    defaults: { _controller: "CtcAppBundle:Admin\Hotel\\Location:new" }
+
+admin_location_create:
+    pattern:  /create
+    defaults: { _controller: "CtcAppBundle:Admin\Hotel\\Location:create" }
+    requirements: { _method: post }
+
+admin_location_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "CtcAppBundle:Admin\Hotel\\Location:edit" }
+
+admin_location_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "CtcAppBundle:Admin\Hotel\\Location:update" }
+    requirements: { _method: post|put }
+
+admin_location_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "CtcAppBundle:Admin\Hotel\\Location:delete" }
+
+
+

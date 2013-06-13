@@ -1,0 +1,81 @@
+{% extends '::layout_admin.html.twig' %}
+
+{% block head_style %}
+{{ parent() }}
+
+{% stylesheets filter='?yui_css'
+    '@CtcAppBundle/Resources/public/css/admin/DT_bootstrap.css'
+    output = 'css/compiled/admin/DT_bootstrap.css'
+    %}
+    <link href="{{ asset_url }}" type="text/css" rel="stylesheet" />
+    {% endstylesheets %}
+
+{% endblock %}
+
+
+{% block content_row -%}
+
+
+
+{#<div class="widget widget-nopad stacked">
+    <div class="widget-header">
+        <h3>Destinations</h3>
+        <a class="btn btn-primary pull-right" href="{{ path('admin_destination_new') }}">
+            Create a new entry
+        </a>
+    </div>
+    <div class="widget-content">#}
+
+    <p>
+        <a class="btn btn-primary" href="{{ path('admin_hotel_new') }}"><i class="icon-plus"></i> Nuevo</a>
+
+    </p>
+
+    <table id="table" class="table table-bordered table-dataTable">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Destination</th>
+                <th>Last update</th>
+                <th style="width: 75px">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+{#</div>#}
+{#</div>#}
+
+    {% endblock %}
+
+
+{% block foot_script %}
+
+    {{ parent() }}
+
+    {% javascripts
+    '@CtcAppBundle/Resources/public/js/lib/jquery.dataTables.min.js'
+    '@CtcAppBundle/Resources/public/js/admin/DT_bootstrap.js'
+
+    %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+
+{% endblock %}
+
+
+{% block foot_script_additional %}
+
+    <script>
+        $(document).ready(function() {
+            $('#table').dataTable( {
+                "bProcessing": true,
+                "bServerSide": true,
+                "sAjaxSource": "{{ path("admin_hotel_list") }}",
+                "sDom": "<'row'<'span6'l><'span6'f>r>t<'row'<'span6'i><'span6'p>>"
+            } );
+        } );
+    </script>
+
+{% endblock %}

@@ -1,0 +1,55 @@
+{% extends '::layout_admin.html.twig' %}
+
+{% block content -%}
+
+    <div class="widget widget-table stacked">
+        <div class="widget-header">
+            <h3>Destinations</h3>
+            <a class="btn btn-primary pull-right" href="{{ path('admin_destination_new') }}">
+                Create a new entry
+            </a>
+        </div>
+        <div class="widget-content">
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>{{ knp_pagination_sortable(pagination, 'Name', 'd.name')|raw }}</th>
+                <th>Type</th>
+                <th>Description</th>
+                <th style="width: 70px">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in pagination %}
+            <tr>
+                <td><div style="margin-left: {{ 20*entity.lvl }}px"> {{ entity.name }}</div></td>
+                <td>{{ entity.type }}</td>
+                <td>{{ entity.description }}</td>
+                <td>
+
+
+                        <a class="btn btn-mini" href="{{ path('admin_destination_edit', { 'id': entity.id }) }}"><i class="btn-icon-only icon-edit"></i></a>
+
+                        <a class="btn btn-mini btn-danger" href="{{ path('admin_destination_delete', { 'id': entity.id }) }}"><i class="btn-icon-only icon-remove"></i></a>
+
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+        <tfoot>
+        <tr>
+            <td colspan="4">
+                <div class="pagination-centered">
+                    {{ knp_pagination_render(pagination) }}
+                </div>
+            </td>
+        </tr>
+        </tfoot>
+    </table>
+
+        </div>
+
+    </div>
+
+
+    {% endblock %}

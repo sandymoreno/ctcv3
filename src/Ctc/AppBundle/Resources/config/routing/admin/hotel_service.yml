@@ -1,0 +1,33 @@
+admin_hotel_service:
+    pattern:  /
+    defaults: { _controller: "CtcAppBundle:Admin\Hotel\\HotelService:index" }
+
+admin_hotel_service_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "CtcAppBundle:Admin\Hotel\\HotelService:show" }
+    
+    
+admin_hotel_service_new:
+    pattern:  /new
+    defaults: { _controller: "CtcAppBundle:Admin\Hotel\\HotelService:new" }
+
+admin_hotel_service_create:
+    pattern:  /create
+    defaults: { _controller: "CtcAppBundle:Admin\Hotel\\HotelService:create" }
+    requirements: { _method: post }
+
+admin_hotel_service_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "CtcAppBundle:Admin\Hotel\\HotelService:edit" }
+
+admin_hotel_service_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "CtcAppBundle:Admin\Hotel\\HotelService:update" }
+    requirements: { _method: post|put }
+
+admin_hotel_service_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "CtcAppBundle:Admin\Hotel\\HotelService:delete" }
+
+
+

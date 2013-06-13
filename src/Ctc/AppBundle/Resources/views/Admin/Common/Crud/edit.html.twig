@@ -1,0 +1,17 @@
+{% extends '::layout_admin.html.twig' %}
+
+{% block content -%}
+
+    {% include 'CtcAppBundle:Admin/Common/Crud:_form.html.twig' with {'form': edit_form,'route_action': path(route_prefix~'_update', {'id': entity.id})} %}
+
+
+    <ul class="record_actions">
+        <li>
+            <a href="{{ path(route_prefix) }}">
+                Back to the list
+            </a>
+        </li>
+    </ul>
+
+
+{% endblock %}

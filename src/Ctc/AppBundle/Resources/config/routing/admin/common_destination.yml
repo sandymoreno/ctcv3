@@ -1,0 +1,29 @@
+admin_destination:
+    pattern:  /
+    defaults: { _controller: "CtcAppBundle:Admin\Common\Destination:index" }
+
+admin_destination_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "CtcAppBundle:Admin\Common\Destination:show" }
+
+admin_destination_new:
+    pattern:  /new
+    defaults: { _controller: "CtcAppBundle:Admin\Common\Destination:new" }
+
+admin_destination_create:
+    pattern:  /create
+    defaults: { _controller: "CtcAppBundle:Admin\Common\Destination:create" }
+    requirements: { _method: post }
+
+admin_destination_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "CtcAppBundle:Admin\Common\Destination:edit" }
+
+admin_destination_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "CtcAppBundle:Admin\Common\Destination:update" }
+    requirements: { _method: post|put }
+
+admin_destination_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "CtcAppBundle:Admin\Common\Destination:delete" }

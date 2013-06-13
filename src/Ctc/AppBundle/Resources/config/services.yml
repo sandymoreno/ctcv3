@@ -1,0 +1,42 @@
+parameters:
+#    ctc_app.example.class: Ctc\AppBundle\Example
+
+services:
+#    ctc_app.example:
+#        class: %ctc_app.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
+
+  ccs.admin.navbar:
+      class: %mopa_bootstrap.navbar.generic%
+      arguments:
+          # first argument: a named array of menues:
+          - { leftmenu: '@ccs.backend.navbar.menu=', rightmenu: '@ccs.backend.navbar.user_menu='}
+          # second argument: a named array of FormType Classes
+          - { }
+          # third argument: a named array of options
+          - { title: "CTC Panel", titleRoute: "ctc_admin_dashboard", fixedTop: true, inverse: true, isFluid: true, template:MopaBootstrapBundle:Navbar:navbar.html.twig }
+      tags:
+          # The alias is used to retrieve the navbar in templates
+          - { name: mopa_bootstrap.navbar, alias: frontendNavbar }
+
+  ccs.backend.navbar_builder:
+      class: Ctc\AppBundle\Menu\Admin\Builder
+      arguments: [ '@knp_menu.factory', '@security.context' ]
+
+  ccs.backend.navbar.menu:
+      class: Knp\Menu\MenuItem # the service definition requires setting the class
+      factory_service: ccs.backend.navbar_builder
+      factory_method: mainMenu
+      arguments: ["@request"]
+      scope: request # needed as we have the request as a dependency here
+      tags:
+          - { name: knp_menu.menu, alias: examplemain } # The alias is what is used to retrieve the menu
+
+  ccs.backend.navbar.user_menu:
+      class: Knp\Menu\MenuItem # the service definition requires setting the class
+      factory_service: ccs.backend.navbar_builder
+      factory_method: createRightSideDropdownMenu
+      arguments: ["@request"]
+      scope: request # needed as we have the request as a dependency here
+      tags:
+          - { name: knp_menu.menu, alias: exampledropdown } # The alias is what is used to retrieve the menu

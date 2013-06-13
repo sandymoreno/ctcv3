@@ -1,0 +1,26 @@
+{% extends 'CtcAppBundle:Admin/Common/Crud:index.html.twig' %}
+
+
+{% block content_sidebar %}
+    <div class="widget stacked">
+
+        <div class="widget-header">
+            <i class="icon-list-alt"></i>
+            <h3>Recent News</h3>
+        </div> <!-- /widget-header -->
+
+        <div class="widget-content">
+
+            <ul class="nav nav-pills nav-stacked">
+                <li><a href="{{ path('admin_location') }}">Location</a></li>
+                <li><a href="{{ path('admin_interest') }}">Interests</a></li>
+                <li><a href="{{ path('admin_hotel_service') }}">Hotel services</a></li>
+                {#<li><a href="#">Profile</a></li>#}
+                {#<li><a href="#">Messages</a></li>#}
+            </ul>
+
+        </div> <!-- /widget-content -->
+
+    </div>
+{% endblock %}
+

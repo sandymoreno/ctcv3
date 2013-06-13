@@ -1,0 +1,24 @@
+ctc_admin_dashboard:
+    pattern:  /dashboard
+    defaults: { _controller: CtcAppBundle:Admin\Dashboard:index, locale: es }
+
+
+ctc_app_admin_destination:
+    resource: "@CtcAppBundle/Resources/config/routing/admin/common_destination.yml"
+    prefix:   /destination
+
+ctc_app_admin_hotel:
+    resource: "@CtcAppBundle/Resources/config/routing/admin/hotel_hotel.yml"
+    prefix:   /hotel
+
+ctc_app_admin_hotel_location:
+    resource: "@CtcAppBundle/Resources/config/routing/admin/hotel_location.yml"
+    prefix:   /location
+
+ctc_app_admin_interest:
+    resource: "@CtcAppBundle/Resources/config/routing/admin/common_interest.yml"
+    prefix:   /interest
+
+ctc_app_admin_hotel_service:
+    resource: "@CtcAppBundle/Resources/config/routing/admin/hotel_service.yml"
+    prefix:   /service

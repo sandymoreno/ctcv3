@@ -1,6 +1,9 @@
 app/logs/
+app/Resources/java/*
 app/cache/
 web/bundles/
+web/js/*
+web/css/*
 web/uploads
 app/config/parameters.yml
 *~

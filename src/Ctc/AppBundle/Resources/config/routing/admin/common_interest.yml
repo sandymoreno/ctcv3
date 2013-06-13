@@ -1,0 +1,33 @@
+admin_interest:
+    pattern:  /
+    defaults: { _controller: "CtcAppBundle:Admin\Common\\Interest:index" }
+
+admin_interest_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "CtcAppBundle:Admin\Common\\Interest:show" }
+    
+    
+admin_interest_new:
+    pattern:  /new
+    defaults: { _controller: "CtcAppBundle:Admin\Common\\Interest:new" }
+
+admin_interest_create:
+    pattern:  /create
+    defaults: { _controller: "CtcAppBundle:Admin\Common\\Interest:create" }
+    requirements: { _method: post }
+
+admin_interest_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "CtcAppBundle:Admin\Common\\Interest:edit" }
+
+admin_interest_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "CtcAppBundle:Admin\Common\\Interest:update" }
+    requirements: { _method: post|put }
+
+admin_interest_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "CtcAppBundle:Admin\Common\\Interest:delete" }
+
+
+

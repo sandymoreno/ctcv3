@@ -1,0 +1,7 @@
+{% extends '::layout_admin.html.twig' %}
+
+{% block content -%}
+
+ {% include 'CtcAppBundle:Admin/Common/Crud:_form.html.twig' with {'route_action':path('admin_hotel_create')} %}
+
+{% endblock %}
