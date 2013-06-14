@@ -36,7 +36,9 @@
         "jms/translation-bundle": "dev-master",
         "liip/imagine-bundle": "dev-master",
 		"genemu/form-bundle": "2.2.*",
-		"lexik/mailer-bundle": "dev-master"
+		"lexik/mailer-bundle": "dev-master",
+		"a2lix/translation-form-bundle": "1.*@dev",
+		"knplabs/doctrine-behaviors": "dev-master"
 		
 		
 		
