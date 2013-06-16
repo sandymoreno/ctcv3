@@ -2,6 +2,13 @@
 
 {% block content -%}
 
- {% include 'CtcAppBundle:Admin/Common/Crud:_form.html.twig' with {'route_action': path(route_prefix~'_create')} %}
+
+ <div class="widget stacked">
+     <div class="widget-header">New</div>
+     <div class="widget-content">
+         {% include 'CtcAppBundle:Admin/Common/Crud:_form.html.twig' with {'route_action': path(route_prefix~'_create')} %}
+     </div>
+ </div>
+
 
 {% endblock %}

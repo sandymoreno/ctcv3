@@ -110,7 +110,7 @@ stof_doctrine_extensions:
 a2lix_translation_form:
     locales: [es, en]       # [1]
     default_required: true      # [2]
-    templating: "A2lixTranslationFormBundle::default.html.twig"      # [3]
+    templating: "CtcAppBundle:Admin/A2lix:default.html.twig"      # [3]
     use_aop: false              # [4]
     default_class:
         service: "A2lix\TranslationFormBundle\TranslationForm\DefaultTranslationForm"
