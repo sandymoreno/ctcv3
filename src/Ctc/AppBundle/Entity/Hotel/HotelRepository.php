@@ -12,4 +12,20 @@ use Doctrine\ORM\EntityRepository;
  */
 class HotelRepository extends EntityRepository
 {
+
+    public function findAllQuery(){
+        $q = $this->getEntityManager()->createQuery('Select d, t from CtcAppBundle:Hotel\Hotel d left join d.translations t');
+
+        return $q;
+
+
+    }
+
+
+    public function findAll(){
+
+        return $this->findAllQuery()->execute();
+
+    }
+
 }

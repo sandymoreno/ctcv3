@@ -4,16 +4,23 @@ namespace Ctc\AppBundle\Entity\Common;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-
+use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 /**
  * Destination
  *
  * @Gedmo\Tree(type="nested")
- * @ORM\Table(name="destination")
+ * @ORM\Table
  * @ORM\Entity(repositoryClass="Ctc\AppBundle\Entity\Common\DestinationRepository")
  */
 class Destination
 {
+
+    use ORMBehaviors\Timestampable\Timestampable;
+    use ORMBehaviors\Blameable\Blameable;
+    use ORMBehaviors\Translatable\Translatable;
+
+
+
     /**
      * @var integer
      *
@@ -37,14 +44,6 @@ class Destination
      */
     private $type;
 
-
-    /**
-     * @var string
-     *
-     * @Gedmo\Translatable
-     * @ORM\Column(name="description", type="text")
-     */
-    private $description;
 
     /**
      * @Gedmo\TreeLeft
@@ -99,48 +98,7 @@ class Destination
      */
     private $image;
 
-    /**
-     * @var \DateTime
-     *
-     * @Gedmo\Timestampable(on="create")
-     * @ORM\Column(name="created_at", type="datetime")
-     */
-    private $createdAt;
-
-    /**
-     * @var \DateTime
-     *
-     * @Gedmo\Timestampable(on="update")
-     * @ORM\Column(name="updated_at", type="datetime")
-     */
-    private $updatedAt;
-
-    /**
-     * @Gedmo\Blameable(on="create")
-     * @ORM\ManyToOne(targetEntity="Ctc\UserBundle\Entity\User")
-     * @ORM\JoinColumn(name="created_by", referencedColumnName="id")
-     */
-    private $createdBy;
-
-    /**
-     * @var string
-     *
-     * @Gedmo\Blameable(on="update")
-     * @ORM\ManyToOne(targetEntity="Ctc\UserBundle\Entity\User")
-     * @ORM\JoinColumn(name="updated_by", referencedColumnName="id")
-     */
-    private $updatedBy;
-
-
-
-    public function setTranslatableLocale($locale)
-    {
-        $this->locale = $locale;
-    }
-
-
-
-    public function __toString(){
+      public function __toString(){
         return $this->getName();
     }
 
@@ -189,28 +147,6 @@ class Destination
     }
 
 
-    /**
-     * Set description
-     *
-     * @param string $description
-     * @return Hotel
-     */
-    public function setDescription($description)
-    {
-        $this->description = $description;
-
-        return $this;
-    }
-
-    /**
-     * Get description
-     *
-     * @return string
-     */
-    public function getDescription()
-    {
-        return $this->description;
-    }
 
     /**
      * Constructor
@@ -392,97 +328,14 @@ class Destination
         return $this->image;
     }
 
-    /**
-     * Set createdAt
-     *
-     * @param \DateTime $createdAt
-     * @return Hotel
-     */
-    public function setCreatedAt($createdAt)
+
+    public function __call($methodOrProperty, $arguments)
     {
-        $this->createdAt = $createdAt;
+        if (!method_exists(self::getTranslationEntityClass(), $methodOrProperty)) {
+            $methodOrProperty = 'get'. ucfirst($methodOrProperty);
+        }
 
-        return $this;
-    }
-
-    /**
-     * Get createdAt
-     *
-     * @return \DateTime
-     */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
-    }
-
-    /**
-     * Set updatedAt
-     *
-     * @param \DateTime $updatedAt
-     * @return Hotel
-     */
-    public function setUpdatedAt($updatedAt)
-    {
-        $this->updatedAt = $updatedAt;
-
-        return $this;
-    }
-
-    /**
-     * Get updatedAt
-     *
-     *
-     * @return \DateTime
-     */
-    public function getUpdatedAt()
-    {
-        return $this->updatedAt;
-    }
-
-    /**
-     * Set createdBy
-     *
-     * @param string $createdBy
-     * @return Hotel
-     */
-    public function setCreatedBy($createdBy)
-    {
-        $this->createdBy = $createdBy;
-
-        return $this;
-    }
-
-    /**
-     * Get createdBy
-     *
-     * @return string
-     */
-    public function getCreatedBy()
-    {
-        return $this->createdBy;
-    }
-
-    /**
-     * Set updatedBy
-     *
-     * @param string $updatedBy
-     * @return Hotel
-     */
-    public function setUpdatedBy($updatedBy)
-    {
-        $this->updatedBy = $updatedBy;
-
-        return $this;
-    }
-
-    /**
-     * Get updatedBy
-     *
-     * @return string
-     */
-    public function getUpdatedBy()
-    {
-        return $this->updatedBy;
+        return $this->proxyCurrentLocaleTranslation($methodOrProperty, $arguments);
     }
 
 

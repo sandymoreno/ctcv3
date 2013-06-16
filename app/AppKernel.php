@@ -26,6 +26,7 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new RaulFraile\Bundle\LadybugBundle\RaulFraileLadybugBundle(),
+            new A2lix\TranslationFormBundle\A2lixTranslationFormBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

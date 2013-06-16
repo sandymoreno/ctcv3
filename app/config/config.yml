@@ -1,7 +1,10 @@
+parameters:
+    knp.doctrine_behaviors.blameable_listener.user_entity: Ctc\UserBundle\Entity\User
+
 imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
-
+    - { resource: ../../vendor/knplabs/doctrine-behaviors/config/orm-services.yml }
 framework:
     #esi:             ~
     translator:      { fallback: %locale% }
@@ -103,3 +106,15 @@ stof_doctrine_extensions:
             timestampable: true
             blameable: true
             sortable: true
+
+a2lix_translation_form:
+    locales: [es, en]       # [1]
+    default_required: true      # [2]
+    templating: "A2lixTranslationFormBundle::default.html.twig"      # [3]
+    use_aop: false              # [4]
+    default_class:
+        service: "A2lix\TranslationFormBundle\TranslationForm\DefaultTranslationForm"
+        listener: "A2lix\TranslationFormBundle\Form\EventListener\DefaultTranslationsSubscriber"
+        types:
+             translations: "A2lix\TranslationFormBundle\Form\Type\TranslationsType"
+             translationsFields: "A2lix\TranslationFormBundle\Form\Type\TranslationsFieldsType"

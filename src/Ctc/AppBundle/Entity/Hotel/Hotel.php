@@ -5,18 +5,26 @@ namespace Ctc\AppBundle\Entity\Hotel;
 use Ctc\AppBundle\Entity\Common\Interest;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use Gedmo\Mapping\Annotation as Gedmo;
+
 use Symfony\Component\Validator\Constraints as Assert;
+use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 
 /**
  * Hotel
  *
- * @ORM\Table(name="hotel")
+ * @ORM\Table
  * @ORM\HasLifecycleCallbacks
  * @ORM\Entity(repositoryClass="Ctc\AppBundle\Entity\Hotel\HotelRepository")
  */
 class Hotel
 {
+
+
+    use ORMBehaviors\Timestampable\Timestampable;
+    use ORMBehaviors\Blameable\Blameable;
+    use ORMBehaviors\Translatable\Translatable;
+
+
     /**
      * @var integer
      *
@@ -26,19 +34,7 @@ class Hotel
      */
     private $id;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="name", type="string", length=255)
-     */
-    private $name;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="short_name", type="string", length=255)
-     */
-    private $shortName;
 
     /**
      * @var string
@@ -70,12 +66,6 @@ class Hotel
      */
     private $category;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="description", type="text")
-     */
-    private $description;
 
     /**
      * @var string
@@ -105,40 +95,6 @@ class Hotel
 
 
 
-
-    /**
-     * @var \DateTime
-     *
-     * @Gedmo\Timestampable(on="create")
-     * @ORM\Column(name="created_at", type="datetime")
-     */
-    private $createdAt;
-
-    /**
-     * @var \DateTime
-     *
-     * @Gedmo\Timestampable(on="update")
-     * @ORM\Column(name="updated_at", type="datetime")
-     */
-    private $updatedAt;
-
-    /**
-     * @Gedmo\Blameable(on="create")
-     * @ORM\ManyToOne(targetEntity="Ctc\UserBundle\Entity\User")
-     * @ORM\JoinColumn(name="created_by", referencedColumnName="id")
-     */
-    private $createdBy;
-
-    /**
-     * @var string
-     *
-     * @Gedmo\Blameable(on="update")
-     * @ORM\ManyToOne(targetEntity="Ctc\UserBundle\Entity\User")
-     * @ORM\JoinColumn(name="updated_by", referencedColumnName="id")
-     */
-    private $updatedBy;
-
-
     /**
      * Get id
      *
@@ -149,51 +105,7 @@ class Hotel
         return $this->id;
     }
 
-    /**
-     * Set name
-     *
-     * @param string $name
-     * @return Hotel
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-    
-        return $this;
-    }
 
-    /**
-     * Get name
-     *
-     * @return string 
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * Set shortName
-     *
-     * @param string $shortName
-     * @return Hotel
-     */
-    public function setShortName($shortName)
-    {
-        $this->shortName = $shortName;
-    
-        return $this;
-    }
-
-    /**
-     * Get shortName
-     *
-     * @return string 
-     */
-    public function getShortName()
-    {
-        return $this->shortName;
-    }
 
     /**
      * Set address
@@ -287,28 +199,6 @@ class Hotel
         return $this->category;
     }
 
-    /**
-     * Set description
-     *
-     * @param string $description
-     * @return Hotel
-     */
-    public function setDescription($description)
-    {
-        $this->description = $description;
-    
-        return $this;
-    }
-
-    /**
-     * Get description
-     *
-     * @return string 
-     */
-    public function getDescription()
-    {
-        return $this->description;
-    }
 
     /**
      * Set image
@@ -333,97 +223,7 @@ class Hotel
         return $this->image;
     }
 
-    /**
-     * Set createdAt
-     *
-     * @param \DateTime $createdAt
-     * @return Hotel
-     */
-    public function setCreatedAt($createdAt)
-    {
-        $this->createdAt = $createdAt;
-    
-        return $this;
-    }
 
-    /**
-     * Get createdAt
-     *
-     * @return \DateTime 
-     */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
-    }
-
-    /**
-     * Set updatedAt
-     *
-     * @param \DateTime $updatedAt
-     * @return Hotel
-     */
-    public function setUpdatedAt($updatedAt)
-    {
-        $this->updatedAt = $updatedAt;
-    
-        return $this;
-    }
-
-    /**
-     * Get updatedAt
-     *
-     * @return \DateTime 
-     */
-    public function getUpdatedAt()
-    {
-        return $this->updatedAt;
-    }
-
-    /**
-     * Set createdBy
-     *
-     * @param string $createdBy
-     * @return Hotel
-     */
-    public function setCreatedBy($createdBy)
-    {
-        $this->createdBy = $createdBy;
-    
-        return $this;
-    }
-
-    /**
-     * Get createdBy
-     *
-     * @return string 
-     */
-    public function getCreatedBy()
-    {
-        return $this->createdBy;
-    }
-
-    /**
-     * Set updatedBy
-     *
-     * @param string $updatedBy
-     * @return Hotel
-     */
-    public function setUpdatedBy($updatedBy)
-    {
-        $this->updatedBy = $updatedBy;
-    
-        return $this;
-    }
-
-    /**
-     * Get updatedBy
-     *
-     * @return string 
-     */
-    public function getUpdatedBy()
-    {
-        return $this->updatedBy;
-    }
 
 
     public function getAbsolutePath()
@@ -572,4 +372,15 @@ class Hotel
     {
         return $this->services;
     }
+
+
+    public function __call($methodOrProperty, $arguments)
+    {
+        if (!method_exists(self::getTranslationEntityClass(), $methodOrProperty)) {
+            $methodOrProperty = 'get'. ucfirst($methodOrProperty);
+        }
+
+        return $this->proxyCurrentLocaleTranslation($methodOrProperty, $arguments);
+    }
+
 }

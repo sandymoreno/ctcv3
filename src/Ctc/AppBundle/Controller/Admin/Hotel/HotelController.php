@@ -60,34 +60,37 @@ class HotelController extends CrudController
             ->createQueryBuilder()
             ->select('c')
             ->from('CtcAppBundle:Hotel\Hotel', 'c')
-            ->leftJoin('c.destination', 'dest');
+            ->leftJoin('c.destination', 'dest')
+            ->leftJoin('c.translations', 't');
         /* Array of database columns which should be read and sent back to DataTables. Use a space where
          * you want to insert a non-database field (for example a counter or static image)
          */
-        $aColumns = array('name', 'destination_id', 'updated_at', ' ');
+        $aColumns = array('t.name', 'dest.name', 'c.updated_at', ' ');
         /**
          * search
          */
         if ($request->get('sSearch')) {
             $search = strtolower($request->get('sSearch'));
             $qb
-                ->orwhere("LOWER(" . $qb->getRootAlias() . ".name) LIKE '%" . $search . "%'");
+                ->orwhere("LOWER(t.name) LIKE '%" . $search . "%'");
         }
         /*
          * Ordering
          */
+
 
         for ($i = 0; $i < intval($request->get('iSortingCols')); $i++) {
             if ($request->get('bSortable_' . intval($request->get('iSortCol_' . $i))) == "true") {
                 if (is_array($aColumns[($request->get('iSortCol_' . $i))])) {
                     $qb->add('orderBy', $aColumns[intval($request->get('iSortCol_' . $i))][0] . '.' . $aColumns[intval($request->get('iSortCol_' . $i))][1] . ' ' . $request->get('sSortDir_' . $i));
                 } else {
-                    $qb->add('orderBy', $qb->getRootAlias() . '.' . $aColumns[intval($request->get('iSortCol_' . $i))] . ' ' . $request->get('sSortDir_' . $i));
+                    $qb->add('orderBy', $aColumns[intval($request->get('iSortCol_' . $i))] . ' ' . $request->get('sSortDir_' . $i));
                 }
             }
         }
 
-       $query = $qb->getQuery();
+
+        $query = $qb->getQuery();
 
         /*
         * Paging

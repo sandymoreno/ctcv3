@@ -3,12 +3,12 @@
 namespace Ctc\AppBundle\Entity\Common;
 
 use Doctrine\ORM\Mapping as ORM;
-use Gedmo\Mapping\Annotation as Gedmo;
+use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 
 /**
  * Nomenclador
  *
- * @ORM\Table(name="nomenclador")
+ * @ORM\Table
  * @ORM\Entity
  * @ORM\InheritanceType("SINGLE_TABLE")
  * @ORM\DiscriminatorColumn(name="type", type="string")
@@ -23,6 +23,12 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 abstract class Nomenclador
 {
+
+    use ORMBehaviors\Timestampable\Timestampable;
+    use ORMBehaviors\Blameable\Blameable;
+    use ORMBehaviors\Sluggable\Sluggable;
+
+
     /**
      * @var integer
      *
@@ -54,24 +60,14 @@ abstract class Nomenclador
     private $description;
 
 
-//    /**
-//     * @Gedmo\Locale
-//     * Used locale to override Translation listener`s locale
-//     * this is not a mapped field of entity metadata, just a simple property
-//     */
-//    private $locale;
-//
-//
-//
-//    public function setTranslatableLocale($locale)
-//    {
-//        $this->locale = $locale;
-//    }
-
-
-
     public function __toString(){
         return $this->getName();
+    }
+
+
+    public function getSluggableFields()
+    {
+        return [ 'name' ];
     }
 
 

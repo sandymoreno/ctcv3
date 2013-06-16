@@ -40,7 +40,8 @@ class destinationLoad extends AbstractFixture implements OrderedFixtureInterface
         foreach ($provincias as $key => $nombre) {
             $provincia = new Destination();
             $provincia->setName($nombre[0]);
-            $provincia->setDescription('Descripcion de '.$nombre[0]);
+            $provincia->translate('en')->setDescription('Description of '.$nombre[0]);
+            $provincia->translate('es')->setDescription('Descripción de '.$nombre[0]);
             $provincia->setType('provincia');
 
             $manager->persist($provincia);
@@ -69,9 +70,9 @@ class destinationLoad extends AbstractFixture implements OrderedFixtureInterface
             foreach ($dest as $d){
                 $destination = new Destination();
                 $destination->setName($d);
-                $destination->setDescription('Descripcion de '.$d);
+                $destination->translate('en')->setDescription('Description of '.$nombre[0]);
+                $destination->translate('es')->setDescription('Descripción de '.$nombre[0]);
                 $destination->setType('destino');
-                $destination->setTranslatableLocale('en');
                 $destination->setParent($this->getReference($key));
                 $manager->persist($destination);
             }

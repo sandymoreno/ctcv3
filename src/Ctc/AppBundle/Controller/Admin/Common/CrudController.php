@@ -46,7 +46,7 @@ class CrudController extends RadController
     {
 
         $form = $this->createForm($this->form, $this->entity);
-        $form->bind($request);
+        $form->submit($request);
 
         if ($form->isValid()) {
             $this->persist($this->entity, true);

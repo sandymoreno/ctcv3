@@ -12,15 +12,13 @@ class DestinationType extends AbstractType
     {
         $builder
             ->add('name')
-//            ->add('knownAs')
-            ->add('description')
 //            ->add('lft')
 //            ->add('lvl')
 //            ->add('rgt')
 //            ->add('root')
             ->add('parent')
             ->add('type','choice', array('choices'=>array('provincia'=>'Provincia','ciudad'=>'Ciudad')))
-
+            ->add('translations', 'a2lix_translations')
         ;
     }
 
